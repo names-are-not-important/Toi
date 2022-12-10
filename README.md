@@ -1,4 +1,4 @@
 # Toi
-Funny game 
-Game idea: Bruce 
-Coding: Me 
+Funny game  
+Game idea: Bruce  
+Coding: Me  
