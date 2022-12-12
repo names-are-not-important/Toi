@@ -11,5 +11,7 @@ Coding: [Me](https://github.com/names-are-not-important)
 
 
 Made in **C++** the best coding language!    
-**if you have any issues please report them to me and I will fix them**
+**if you have any issues please report them to me and I will fix them**   
+[Check progress](https://github.com/users/names-are-not-important/projects/2)
+
 
