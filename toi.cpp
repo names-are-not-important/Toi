@@ -1,6 +1,6 @@
-#include "toi.h"
-#include "C:\Users\ewall\OneDrive\Documents\SDL2\SDL2-2.24.2\x86_64-w64-mingw32\include\SDL2\SDL.h"
-
+#include "Headers\toi.h"
+#include "SDL.h"
+#include <iostream>
 
 void fullscreen(SDL_Window* window, bool value) {
     if (value) {
@@ -18,10 +18,13 @@ void fullscreen(SDL_Window* window, bool value) {
 
 int main(int argc, char** argv)
 {
+    bool canpoop = false;
     bool fullscreener = false;
     bool pooping = false;
     bool flipx = false;
     bool clicked = false;
+    double eplaspedtime = 0;
+    bool flushing = false;
     Uint64 NOW = SDL_GetPerformanceCounter();
     Uint64 LAST = 0;
     double deltaTime = 0;
@@ -59,6 +62,12 @@ int main(int argc, char** argv)
     curserpos.y = 10;
     curserpos.w = 50;
     curserpos.h = 50;
+
+    SDL_Rect flusherpos;
+    flusherpos.x = 25;
+    flusherpos.y = 313;
+    flusherpos.w = 40;
+    flusherpos.h = 17;
 
     SDL_Rect bobpos;
     bobpos.x = 500;
@@ -115,6 +124,25 @@ Uint32 iconrmask, icongmask, iconbmask, iconamask;
         noclickbmask = 0x00ff0000;
         noclickamask = (img_brucesfacenoclick.bytes_per_pixel == 3) ? 0 : 0xff000000;
     }
+
+
+
+
+    Uint32 flusherrmask, flushergmask, flusherbmask, flusherkamask;
+    if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+        int shift = (img_flusher.bytes_per_pixel == 3) ? 8 : 0;
+        flusherkamask = 0xff000000 >> shift;
+        flushergmask = 0x00ff0000 >> shift;
+        flusherbmask = 0x0000ff00 >> shift;
+        flusherkamask = 0x000000ff >> shift;
+    }
+    else {
+        flusherrmask = 0x000000ff;
+        flushergmask = 0x0000ff00;
+        flusherbmask = 0x00ff0000;
+        flusherkamask = (img_flusher.bytes_per_pixel == 3) ? 0 : 0xff000000;
+    }
+
     Uint32 clickrmask, clickgmask, clickbmask, clickamask;
     if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
         int shift = (img_click.bytes_per_pixel == 3) ? 8 : 0;
@@ -163,11 +191,33 @@ Uint32 iconrmask, icongmask, iconbmask, iconamask;
         toletamask = (img_funnitorlet.bytes_per_pixel == 3) ? 0 : 0xff000000;
     }
 
+        Uint32 ermask, egmask, ebmask, eamask;
+    if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+        int shift = (img_e.bytes_per_pixel == 3) ? 8 : 0;
+        ermask = 0xff000000 >> shift;
+        egmask = 0x00ff0000 >> shift;
+        ebmask = 0x0000ff00 >> shift;
+        eamask = 0x000000ff >> shift;
+    }
+
+    else {
+        ermask = 0x000000ff;
+        egmask = 0x0000ff00;
+        ebmask = 0x00ff0000;
+        eamask = (img_e.bytes_per_pixel == 3) ? 0 : 0xff000000;
+    }
+
 SDL_Surface* tolet = SDL_CreateRGBSurfaceFrom((void*)img_funnitorlet.pixel_data,
         img_funnitorlet.width, img_funnitorlet.height, img_funnitorlet.bytes_per_pixel * 8,
         img_funnitorlet.bytes_per_pixel * img_funnitorlet.width, toletrmask, toletgmask, toletbmask, toletamask);
 
     SDL_Texture* tolet_texa = SDL_CreateTextureFromSurface(renderer, tolet);
+
+    SDL_Surface* eser = SDL_CreateRGBSurfaceFrom((void*)img_e.pixel_data,
+        img_e.width, img_e.height, img_e.bytes_per_pixel * 8,
+        img_e.bytes_per_pixel * img_e.width, ermask, egmask, ebmask, eamask);
+
+    SDL_Texture* e_tex = SDL_CreateTextureFromSurface(renderer, eser);
 
 
     SDL_Surface* notclick = SDL_CreateRGBSurfaceFrom((void*)img_brucesfacenoclick.pixel_data,
@@ -179,6 +229,17 @@ SDL_Surface* tolet = SDL_CreateRGBSurfaceFrom((void*)img_funnitorlet.pixel_data,
         img_BOBPOOPMAN.width, img_BOBPOOPMAN.height, img_BOBPOOPMAN.bytes_per_pixel * 8,
         img_BOBPOOPMAN.bytes_per_pixel * img_BOBPOOPMAN.width, playerrmask, playergmask, playerbmask, playeramask);
     SDL_Texture* bob_tex = SDL_CreateTextureFromSurface(renderer, bob);
+
+
+    SDL_Surface* flusher = SDL_CreateRGBSurfaceFrom((void*)img_flusher.pixel_data,
+        img_flusher.width, img_flusher.height, img_flusher.bytes_per_pixel * 8,
+        img_flusher.bytes_per_pixel * img_flusher.width, flusherrmask, flushergmask, flusherbmask, flusherkamask);
+    SDL_Texture* flusher_tex = SDL_CreateTextureFromSurface(renderer, flusher);
+    
+
+
+
+
 
 SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
         img_icon.width, img_icon.height, img_icon.bytes_per_pixel * 8,
@@ -198,38 +259,83 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
     int h = 1;
     int w = 1;
     
-  
+      SDL_Rect presse;
+    presse.x = 106;
+    presse.y = 277;
+    presse.w = 50;
+    presse.h = 50;
 
-
+    const double delayTime = 500.0f;
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     bool keep_window_open = true;
     while (keep_window_open) {
+        LAST = NOW;
+        NOW = SDL_GetPerformanceCounter();
+
+        deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
         SDL_GetMouseState(&curserpos.x, &curserpos.y);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_GetWindowSize(window, &w, &h);
 
+            if (bobpos.x < 190) {
+                        if (bobpos.x > -30) {
+                            canpoop = true;
+                            }else{
+                            canpoop = false;
+                            }
+                           
+                           
+                            
+                        }else{
+                        canpoop = false;
+                    }
+                
+                  
             SDL_RenderCopy(renderer, tolet_texa, NULL, &torletpos);
             float scalew = w / 680;
             float scaleh = h / 480;
-   
+            SDL_RenderCopy(renderer, flusher_tex, NULL, &flusherpos);
            // SDL_RenderSetScale(renderer, scalew, scalew);
+            if (flushing) {
+                eplaspedtime += deltaTime;
+         
+                if (eplaspedtime > delayTime) {
+                    std::cout << "f";
+                    flushing = false;
 
+                    eplaspedtime -= delayTime;
+                }
+            }
             if (flipx) {
 
              
                 SDL_RenderCopyEx(renderer, bob_tex, NULL, &bobpos, 0, NULL, SDL_FLIP_HORIZONTAL);
             }
             else {
+                if(canpoop){
+
+               
+                    if (!pooping) {
+                    SDL_RenderCopyEx(renderer, e_tex, NULL, &presse, 0, NULL, SDL_FLIP_NONE);
+               
+                }
+                }
                 SDL_RenderCopyEx(renderer, bob_tex, NULL, &bobpos, 0, NULL, SDL_FLIP_NONE);
             }
-      
+                
+                
+                
+                
+
+
+
         if (clicked) {
-        SDL_RenderCopy(renderer, click_tex, NULL, &curserpos);
-            
+      SDL_RenderCopy(renderer, click_tex, NULL, &curserpos);
+                  
         }
         else {
-        SDL_RenderCopy(renderer, notclick_tex, NULL, &curserpos);
+       SDL_RenderCopy(renderer, notclick_tex, NULL, &curserpos);
         }
         SDL_RenderPresent(renderer);
     
@@ -248,10 +354,12 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                 SDL_DestroyTexture(bob_tex);
                 SDL_DestroyTexture(click_tex);
                 SDL_DestroyTexture(tolet_texa);
+                SDL_DestroyTexture(flusher_tex);
 
                 SDL_DestroyRenderer(renderer);
                 SDL_DestroyWindow(window);
 
+                SDL_FreeSurface(flusher);
                 SDL_FreeSurface(icon);
                 SDL_FreeSurface(click);
                 SDL_FreeSurface(notclick);
@@ -266,12 +374,13 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
 
             case SDL_MOUSEBUTTONUP:
                 
-                
-                
+                std::cout << " x: " << curserpos.x << std::endl;
+                std::cout << " y: " << curserpos.y << std::endl;
                 if (curserpos.y > 250) {
                     if (curserpos.x < 270) {
                         if (curserpos.x > -30) {
-                    
+                            flushing = true; 
+                            std::cout << "af";
 
                         }
                     }
@@ -315,8 +424,8 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                     break;
                 case SDLK_g:
                           case SDLK_e:
-                        if (bobpos.x < 190) {
-                        if (bobpos.x > -30) {
+                    if(canpoop){
+
                             if(pooping){
                              pooping = !pooping;
                            bobpos.y = 280;
@@ -327,12 +436,11 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                            
                             flipx = true;
                             }
+                    }
                            
                            
                             
-                        }
-                
-                    }
+                 
                  
                       break;
                       break;
@@ -367,8 +475,9 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
             SDL_Delay(10);
             }
 
+}
 
-        }
+        
 
         
         
