@@ -12,8 +12,8 @@ Coding: [Me](https://github.com/names-are-not-important)
 <details><summary>Assets</summary>
 
 Flusher: Me     
-Bob: Me + [My friends face](https://github.com/bruce1234lol)    
 Stink lines: Me   
+Bob: Me + [My friends face](https://github.com/bruce1234lol)    
 Tolet: [flaticon](https://www.flaticon.com/free-icon/toilet_194432)   
 Curser: [My friends face](https://github.com/bruce1234lol)   
 Icon: [Once again my friends face](https://github.com/bruce1234lol)   
