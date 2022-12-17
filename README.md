@@ -21,13 +21,13 @@ Icon: [Once again my friends face](https://github.com/bruce1234lol)
 
 <details><summary>Images</summary>
 
-![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screenshot1.png?raw=true)
+![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screen1.png?raw=true)
 
-![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screenshot2.png?raw=true)
+![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screen2.png?raw=true)
 
-![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screenshot3.png?raw=true)
+![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screen3.png?raw=true)
 
-![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screenshot4.png?raw=true)
+![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screen4.png?raw=true)
 
 </details>
 
