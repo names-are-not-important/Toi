@@ -19,9 +19,15 @@ Curser: [My friends face](https://github.com/bruce1234lol)
 Icon: [Once again my friends face](https://github.com/bruce1234lol)   
 </details>
 
-<details><summary>Screen shots</summary>
+<details><summary>Images</summary>
 
-![alt text](https://github.com/names-are-not-important/Toi/tree/main/screenshots/screenshot1.png?raw=true)
+![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screenshot1.png?raw=true)
+
+![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screenshot2.png?raw=true)
+
+![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screenshot3.png?raw=true)
+
+![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screenshot4.png?raw=true)
 
 </details>
 
