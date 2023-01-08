@@ -8,7 +8,6 @@ Coding: [Me](https://github.com/names-are-not-important)
 
 </details>
 
-
 <details><summary>Assets</summary>
 
 Flusher: Me     
