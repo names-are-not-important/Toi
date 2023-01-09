@@ -15,7 +15,11 @@ Stink lines: Me
 Bob: Me + [My friends face](https://github.com/bruce1234lol)    
 Tolet: [flaticon](https://www.flaticon.com/free-icon/toilet_194432)   
 Curser: [My friends face](https://github.com/bruce1234lol)   
-Icon: [Once again my friends face](https://github.com/bruce1234lol)   
+Icon: [Once again my friends face](https://github.com/bruce1234lol)  
+  <details><summary>Download All Assets</summary>
+
+[Download](https://drive.google.com/drive/folders/1v7_r-OjfmDNm_0z1HIRquhXT424lZODt?usp=share_link)    
+</details>
 </details>
 
 <details><summary>Images</summary>
@@ -29,10 +33,7 @@ Icon: [Once again my friends face](https://github.com/bruce1234lol)
 ![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screen4.png?raw=true)
 
 ![code not work please write a issue request!](https://github.com/names-are-not-important/Toi/blob/main/screenshots/screen5.png?raw=true)
-<details><summary>Download All Assets</summary>
 
-[Download](https://drive.google.com/drive/folders/1v7_r-OjfmDNm_0z1HIRquhXT424lZODt?usp=share_link)    
-</details>
 </details>
 
 
