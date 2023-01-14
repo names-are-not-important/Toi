@@ -118,7 +118,7 @@ bool waspooping = false;
         // std::cout << "Failed to get the surface from the window\n";
         return -1;
     }
-  
+  SDL_RenderSetLogicalSize(renderer, 680, 480);
 Uint32 iconrmask, icongmask, iconbmask, iconamask;
     if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
         int shift = (img_icon.bytes_per_pixel == 3) ? 8 : 0;
