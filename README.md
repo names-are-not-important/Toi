@@ -11,7 +11,7 @@ Awsome Image Service: [Flaticon](https://www.flaticon.com/)
      Thea
      
     </details>
-  
+   </details>
 </details>
 
 <details><summary>Assets</summary>
