@@ -7,8 +7,11 @@ Game idea: [Bruce](https://github.com/bruce1234lol)
 Coding: [Me](https://github.com/names-are-not-important)  
 Awsome Image Service: [Flaticon](https://www.flaticon.com/)
   
-  <details><summary>Things we have Gotten from Flaticon</summary> 
-    a
+  <details><summary>Things we have Gotten from Flaticon</summary>   
+      
+   [Toilet](https://www.flaticon.com/free-icon/toilet_194432)  
+   [Sound Icon](https://www.flaticon.com/free-icon/volume_565296)  
+    [Sound Icon (Muted)](https://www.flaticon.com/free-icon/mute_565295)
    </details>
      
    
