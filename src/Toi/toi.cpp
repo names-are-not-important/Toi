@@ -6,6 +6,7 @@
 
 
 #define musicpath "music/backroundmusic.wav"
+#define torlet_flush_soundeffect "music/Sound Effects/torlet.wav"
 
 void fullscreen(SDL_Window* window, bool value) {
     if (value) {
@@ -25,6 +26,7 @@ void fullscreen(SDL_Window* window, bool value) {
 int main(int argc, char** argv)
 {
     Mix_Music* music = NULL;
+    Mix_Chunk* Flush_Sound = NULL;
 
 bool waspooping = false;
     bool canpoop = false;
@@ -70,9 +72,18 @@ bool waspooping = false;
     music = Mix_LoadMUS(musicpath);
     if (music == NULL)
     {
-        //printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());
-       // success = false;
+        printf("Failed to load music! SDL_mixer Error: %s\n", Mix_GetError());
+       
     }
+
+
+    Flush_Sound = Mix_LoadWAV(torlet_flush_soundeffect);
+    if (Flush_Sound == NULL)
+    {
+       printf("Failed to load Flush sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+        
+    }
+
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     SDL_Surface* window_surface = SDL_GetWindowSurface(window);
@@ -441,6 +452,9 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                 Mix_FreeMusic(music);
                 music = NULL;
 
+                Mix_FreeChunk(Flush_Sound);
+                Flush_Sound = NULL;
+
                 SDL_FreeSurface(eser);
                 SDL_FreeSurface(flusher);
                 SDL_FreeSurface(icon);
@@ -462,8 +476,10 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                 if (curserpos.y > 250) {
                     if (curserpos.x < 270) {
                         if (curserpos.x > -30) {
+                            Mix_PlayChannel(-1, Flush_Sound, 0);
+
                             flushing = true; 
-                       //     std::cout << "af";
+                            //play flush sound
 
                         }
                     }
