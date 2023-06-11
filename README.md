@@ -16,10 +16,8 @@ Bob: Me + [My friends face](https://github.com/bruce1234lol)
 Tolet: [flaticon](https://www.flaticon.com/free-icon/toilet_194432)   
 Curser: [My friends face](https://github.com/bruce1234lol)   
 Icon: [Once again my friends face](https://github.com/bruce1234lol)  
-Sound Icon: [Flaticon](https://www.flaticon.com/free-icon/mute_565295)
-
-
-Sound Icon (Muted): [Again Flaticon](https://www.flaticon.com/free-icon/volume_565296)
+Sound Icon: [Flaticon](https://www.flaticon.com/free-icon/volume_565296)
+Sound Icon (Muted): [Again Flaticon](https://www.flaticon.com/free-icon/mute_565295)
   <details><summary>Download All Assets</summary>
 
 [Download](https://drive.google.com/drive/folders/1v7_r-OjfmDNm_0z1HIRquhXT424lZODt?usp=share_link)    
