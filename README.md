@@ -8,7 +8,7 @@ Coding: [Me](https://github.com/names-are-not-important)
 Awsome Image Service: [Flaticon](https://www.flaticon.com/)
   
   <details><summary>Uses For Flaticon</summary>
-     The
+     Thea
      
     </details>
   
