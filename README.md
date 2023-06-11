@@ -51,7 +51,7 @@ Sound Icon (Muted): [Again Flaticon](https://www.flaticon.com/free-icon/mute_565
 
 <details><summary>H0W EmBed!!111!!11</summary>
 
-  Download [Imgtoc](https://www.flaticon.com/free-icon/volume_565296)  
+  [Imgtoc](https://github.com/DanielGibson/Snippets)
   
   </details>
 
