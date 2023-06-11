@@ -5,7 +5,7 @@ Funny game
 
 Game idea: [Bruce](https://github.com/bruce1234lol)   
 Coding: [Me](https://github.com/names-are-not-important)
-Flaticon: [Awsome Image Service](https://www.flaticon.com/)
+Awsome Image Service: [Flaticon](https://www.flaticon.com/)
   <details><summary>Uses</summary>
     [Tolet](https://www.flaticon.com/free-icon/toilet_194432)   
     [Sound Icon:](https://www.flaticon.com/free-icon/volume_565296)  
