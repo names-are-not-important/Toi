@@ -5,7 +5,12 @@ Funny game
 
 Game idea: [Bruce](https://github.com/bruce1234lol)   
 Coding: [Me](https://github.com/names-are-not-important)
-
+Flaticon: [Awsome Image Service](https://www.flaticon.com/)
+  <details><summary>Uses</summary>
+    [Tolet](https://www.flaticon.com/free-icon/toilet_194432)   
+    [Sound Icon:](https://www.flaticon.com/free-icon/volume_565296)  
+    [Sound Icon (Muted)](https://www.flaticon.com/free-icon/mute_565295)
+    </details>
 </details>
 
 <details><summary>Assets</summary>
@@ -16,7 +21,7 @@ Bob: Me + [My friends face](https://github.com/bruce1234lol)
 Tolet: [flaticon](https://www.flaticon.com/free-icon/toilet_194432)   
 Curser: [My friends face](https://github.com/bruce1234lol)   
 Icon: [Once again my friends face](https://github.com/bruce1234lol)  
-Sound Icon: [Flaticon](https://www.flaticon.com/free-icon/volume_565296)
+Sound Icon: [Flaticon](https://www.flaticon.com/free-icon/volume_565296)  
 Sound Icon (Muted): [Again Flaticon](https://www.flaticon.com/free-icon/mute_565295)
   <details><summary>Download All Assets</summary>
 
