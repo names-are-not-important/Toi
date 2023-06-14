@@ -3,7 +3,7 @@
 #include "SDL.h"
 #include <cstdio>
 #include "SDL_mixer.h"
-
+#include <iostream>
 
 #define musicpath "music/backroundmusic.wav"
 #define torlet_flush_soundeffect "music/Sound Effects/torlet.wav"
@@ -27,9 +27,10 @@ int main(int argc, char** argv)
 {
     Mix_Music* music = NULL;
     Mix_Chunk* Flush_Sound = NULL;
-
+    bool musicpaused = false;
 bool waspooping = false;
     bool canpoop = false;
+    bool muted = false;
     bool fullscreener = false;
     bool pooping = false;
     bool flipx = false;
@@ -37,10 +38,10 @@ bool waspooping = false;
     double eplaspedtime = 0;
     int poopalpha = 200;
     bool flushing = false;
-
+    
     float timerCurrent = 20.0f;
     float timerTotal = 5.0f;
-
+    
     Uint64 NOW = SDL_GetPerformanceCounter();
     Uint64 LAST = 0;
     double deltaTime = 0;
@@ -145,7 +146,34 @@ Uint32 iconrmask, icongmask, iconbmask, iconamask;
         iconamask = (img_icon.bytes_per_pixel == 3) ? 0 : 0xff000000;
     }
 
-
+    Uint32 mutermask, mutegmask, mutebmask, muteamask;
+    if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+        int shift = (img_mute.bytes_per_pixel == 3) ? 8 : 0;
+        mutermask = 0xff000000 >> shift;
+        mutegmask = 0x00ff0000 >> shift;
+        mutebmask = 0x0000ff00 >> shift;
+        muteamask = 0x000000ff >> shift;
+    }
+    else {
+        mutermask = 0x000000ff;
+        mutegmask = 0x0000ff00;
+        mutebmask = 0x00ff0000;
+        muteamask = (img_mute.bytes_per_pixel == 3) ? 0 : 0xff000000;
+    }
+    Uint32 soundrmask, soundgmask, soundbmask, soundamask;
+    if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+        int shift = (img_sound.bytes_per_pixel == 3) ? 8 : 0;
+        soundrmask = 0xff000000 >> shift;
+        soundgmask = 0x00ff0000 >> shift;
+        soundbmask = 0x0000ff00 >> shift;
+        soundamask = 0x000000ff >> shift;
+    }
+    else {
+        soundrmask = 0x000000ff;
+        soundgmask = 0x0000ff00;
+        soundbmask = 0x00ff0000;
+        soundamask = (img_sound.bytes_per_pixel == 3) ? 0 : 0xff000000;
+    }
 
     Uint32 noclickrmask, noclickgmask, noclickbmask, noclickamask;
     if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
@@ -261,11 +289,23 @@ else {
 }
 
 
-SDL_Surface* tolet = SDL_CreateRGBSurfaceFrom((void*)img_funnitorlet.pixel_data,
+SDL_Surface* mute = SDL_CreateRGBSurfaceFrom((void*)img_mute.pixel_data,
+    img_mute.width, img_mute.height, img_mute.bytes_per_pixel * 8,
+    img_mute.bytes_per_pixel * img_mute.width, mutermask, mutegmask, mutebmask, muteamask);
+
+    SDL_Texture* mute_tex = SDL_CreateTextureFromSurface(renderer, mute);
+
+    SDL_Surface* sound = SDL_CreateRGBSurfaceFrom((void*)img_sound.pixel_data,
+        img_sound.width, img_sound.height, img_sound.bytes_per_pixel * 8,
+        img_sound.bytes_per_pixel * img_sound.width, soundrmask, soundgmask, soundbmask, soundamask);
+    
+    SDL_Texture* sound_tex = SDL_CreateTextureFromSurface(renderer, sound);
+
+    SDL_Surface* tolet = SDL_CreateRGBSurfaceFrom((void*)img_funnitorlet.pixel_data,
         img_funnitorlet.width, img_funnitorlet.height, img_funnitorlet.bytes_per_pixel * 8,
         img_funnitorlet.bytes_per_pixel * img_funnitorlet.width, toletrmask, toletgmask, toletbmask, toletamask);
 
-    SDL_Texture* tolet_texa = SDL_CreateTextureFromSurface(renderer, tolet);
+    SDL_Texture* tolet_texa = SDL_CreateTextureFromSurface(renderer, tolet);    
 
 SDL_Surface* stink = SDL_CreateRGBSurfaceFrom((void*)img_stinklines.pixel_data,
         img_stinklines.width, img_stinklines.height, img_stinklines.bytes_per_pixel * 8,
@@ -325,10 +365,17 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
     presse.w = 50;
     presse.h = 50;
 
+    SDL_Rect soundinacator;
+    soundinacator.x = 611;
+    soundinacator.y = 4;
+    soundinacator.w = 50;
+    soundinacator.h = 50;
+    Mix_PlayMusic(music, -1);
     const double delayTime = 500.0f;
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     bool keep_window_open = true;
     while (keep_window_open) {
+
         LAST = NOW;
         NOW = SDL_GetPerformanceCounter();
 
@@ -337,6 +384,17 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_GetWindowSize(window, &w, &h);
+        if (muted == true) {
+            Mix_PauseMusic();
+
+           // Mix_HaltChannel(-1);
+            SDL_RenderCopy(renderer, mute_tex, NULL, &soundinacator);
+        }
+        else {
+            Mix_ResumeMusic();
+            SDL_RenderCopy(renderer, sound_tex, NULL, &soundinacator);
+        }
+      
 
                 if(waspooping){
                      if (poopalpha <= 0) {
@@ -358,14 +416,15 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                     SDL_RenderCopyEx(renderer, stink_tex, NULL, &stinklinespos, 0, NULL, SDL_FLIP_HORIZONTAL);
 
                 }
-                   
-                
-                   
 
         if (Mix_PlayingMusic() == 0)
         {
-            //Play the music
-            Mix_PlayMusic(music, -1);
+            if (muted == false) {
+                //Play the music
+             
+                Mix_ResumeMusic();
+
+            }
         }
             if (bobpos.x < 190) {
                         if (bobpos.x > -30) {
@@ -443,8 +502,10 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                 SDL_DestroyTexture(bob_tex);
                 SDL_DestroyTexture(click_tex);
                 SDL_DestroyTexture(tolet_texa);
+                SDL_DestroyTexture(mute_tex);
                 SDL_DestroyTexture(flusher_tex);
                 SDL_DestroyTexture(e_tex);
+                SDL_DestroyTexture(sound_tex);
                 SDL_CloseAudio();
                 SDL_DestroyRenderer(renderer);
                 SDL_DestroyWindow(window);
@@ -460,6 +521,8 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                 SDL_FreeSurface(icon);
                 SDL_FreeSurface(click);
                 SDL_FreeSurface(notclick);
+                SDL_FreeSurface(mute);
+                SDL_FreeSurface(sound);
                 SDL_FreeSurface(bob);
                 SDL_FreeSurface(tolet);
 
@@ -471,20 +534,34 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
 
             case SDL_MOUSEBUTTONUP:
                 
-            //    std::cout << " x: " << curserpos.x << std::endl;
-            //    std::cout << " y: " << curserpos.y << std::endl;
-                if (curserpos.y > 250) {
-                    if (curserpos.x < 270) {
-                        if (curserpos.x > -30) {
-                            Mix_PlayChannel(-1, Flush_Sound, 0);
+               std::cout << " x: " << curserpos.x << std::endl;
+               std::cout << " y: " << curserpos.y << std::endl;
+               if (curserpos.y > 1) {
+                   if (curserpos.y < 53) {
+                       if (curserpos.x > 608) {
+                           if (curserpos.x < 657) {
+                               muted = !muted;
+                           }
+                       }
+                   }
+               } 
+               
+                  
+               
+                    if (curserpos.y > 250) {
+                        if (curserpos.x < 270) {
+                            if (curserpos.x > -30) {
+                                if (muted == false) {
+                                Mix_PlayChannel(-1, Flush_Sound, 0);
+                               
 
-                            flushing = true; 
-                            //play flush sound
-
+                                flushing = true;
+                                //play flush sound
+                                }
+                            }
                         }
                     }
-                }
-               
+                
             case SDL_MOUSEBUTTONDOWN:
 
 
@@ -510,7 +587,9 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym)
                 {
-
+                case SDLK_m:
+                    muted = !muted;
+                    break;
 
                 case SDLK_a:
                 case SDLK_LEFT:
