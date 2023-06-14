@@ -4,9 +4,20 @@ Funny game
 <details><summary>Credits</summary>
 
 Game idea: [Bruce](https://github.com/bruce1234lol)   
-Coding: [Me](https://github.com/names-are-not-important)
+Coding: [Me](https://github.com/names-are-not-important)  
+Awsome Image Service: [Flaticon](https://www.flaticon.com/)
+  
+  <details><summary>Things we have Gotten from Flaticon</summary>   
+      
+   [Toilet](https://www.flaticon.com/free-icon/toilet_194432)  
+   [Sound Icon](https://www.flaticon.com/free-icon/volume_565296)  
+    [Sound Icon (Muted)](https://www.flaticon.com/free-icon/mute_565295)
+   </details>
+     
+   
+  
+   </details>
 
-</details>
 
 <details><summary>Assets</summary>
 
@@ -16,6 +27,8 @@ Bob: Me + [My friends face](https://github.com/bruce1234lol)
 Tolet: [flaticon](https://www.flaticon.com/free-icon/toilet_194432)   
 Curser: [My friends face](https://github.com/bruce1234lol)   
 Icon: [Once again my friends face](https://github.com/bruce1234lol)  
+Sound Icon: [Flaticon](https://www.flaticon.com/free-icon/volume_565296)  
+Sound Icon (Muted): [Again Flaticon](https://www.flaticon.com/free-icon/mute_565295)
   <details><summary>Download All Assets</summary>
 
 [Download](https://drive.google.com/drive/folders/1v7_r-OjfmDNm_0z1HIRquhXT424lZODt?usp=share_link)    
@@ -36,10 +49,16 @@ Icon: [Once again my friends face](https://github.com/bruce1234lol)
 
 </details>
 
+<details><summary>H0W EmBed!!111!!11</summary>
+
+  [Imgtoc](https://github.com/DanielGibson/Snippets)
+  
+  </details>
 
 
 Made in **C++** the best coding language!    
 **if you have any issues please report them to me and I will fix them**   
 [Check progress](https://github.com/users/names-are-not-important/projects/2)
+
 
 
