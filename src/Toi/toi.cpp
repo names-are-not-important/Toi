@@ -3,8 +3,8 @@
 #include "SDL.h"
 #include <cstdio>
 #include "SDL_mixer.h"
+#include <fstream>
 #include <iostream>
-
 #define musicpath "music/backroundmusic.wav"
 #define torlet_flush_soundeffect "music/Sound Effects/torlet.wav"
 
@@ -41,7 +41,8 @@ bool waspooping = false;
     
     float timerCurrent = 20.0f;
     float timerTotal = 5.0f;
-    
+
+
     Uint64 NOW = SDL_GetPerformanceCounter();
     Uint64 LAST = 0;
     double deltaTime = 0;
@@ -64,6 +65,9 @@ bool waspooping = false;
         return -1;
     }
 
+
+
+   
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
     {
@@ -385,9 +389,10 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_GetWindowSize(window, &w, &h);
         if (muted == true) {
+            Mix_HaltChannel(-1);
             Mix_PauseMusic();
 
-           // Mix_HaltChannel(-1);
+          
             SDL_RenderCopy(renderer, mute_tex, NULL, &soundinacator);
         }
         else {
@@ -497,7 +502,7 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
               
             case SDL_QUIT:
                 keep_window_open = false;
-      
+             
                 SDL_DestroyTexture(notclick_tex);
                 SDL_DestroyTexture(bob_tex);
                 SDL_DestroyTexture(click_tex);
@@ -515,7 +520,7 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
 
                 Mix_FreeChunk(Flush_Sound);
                 Flush_Sound = NULL;
-
+               
                 SDL_FreeSurface(eser);
                 SDL_FreeSurface(flusher);
                 SDL_FreeSurface(icon);
@@ -534,13 +539,15 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
 
             case SDL_MOUSEBUTTONUP:
                 
-               std::cout << " x: " << curserpos.x << std::endl;
-               std::cout << " y: " << curserpos.y << std::endl;
+            //   std::cout << " x: " << curserpos.x << std::endl;
+              // std::cout << " y: " << curserpos.y << std::endl;
                if (curserpos.y > 1) {
                    if (curserpos.y < 53) {
                        if (curserpos.x > 608) {
                            if (curserpos.x < 657) {
                                muted = !muted;
+                            
+                               
                            }
                        }
                    }
@@ -589,6 +596,8 @@ SDL_Surface* icon = SDL_CreateRGBSurfaceFrom((void*)img_icon.pixel_data,
                 {
                 case SDLK_m:
                     muted = !muted;
+              
+                   
                     break;
 
                 case SDLK_a:
